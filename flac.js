@@ -36,13 +36,14 @@ var Flac = {
         filenames = filenames.map(f => 'input-flac/' + f)
         execFile('metaflac', filenames.concat(['--show-tag', 'TRACKNUMBER']), (err, stdout, stderr) => {
             if (err) throw err
-            console.log(stdout, stderr)
+            if (stderr) console.log(stderr)
+            console.log(stdout)
 
             let trackFiles = []
             stdout.split('\n').forEach(line => {
                 let trackData = line.split(':TRACKNUMBER=') //TODO validate harder
                 if (trackData.length <= 1) {
-                    console.log('skip...')
+                    console.log('(skip unknown line...)')
                 } else {
                     trackFiles[parseInt(trackData.last, 10)] = path.basename(trackData[0])
                 }
@@ -95,11 +96,11 @@ var Files = {
     },
     loadAndHashFlac0s: function(orderedSongFilenames) { // (ordered by track)
         let fileHashes = []
-        console.log(orderedSongFilenames)
+        //console.log(orderedSongFilenames)
         for (const f of orderedSongFilenames) {
             console.log('Hashing:', f)
             if (typeof f === 'undefined') {
-                console.log('skip undefined...')
+                console.log('(skip undefined...)')
                 continue
             }
 
@@ -135,6 +136,7 @@ if (!Array.prototype.hasOwnProperty("last")) {
 function processAllInputFiles(cb) { // (export)
     Files.prepareWorkspace(function() {
         Files.getOrderedSongFilenames('none', function(inputSongFilenames) {
+            console.log()
             console.log('Processing song files:')
             console.log(inputSongFilenames) //TODO first element as album :)
             console.log()
@@ -158,7 +160,8 @@ function processAllInputFiles(cb) { // (export)
     Files.init()
 
     processAllInputFiles(function(tree) {
-        console.log('Processing Done!')
+        console.log('Processing Done! Merkle Tree Info:')
+        console.log()
         console.log('Root:', tree.root())
         console.log('Depth:', tree.depth())
         console.log('Levels:', tree.levels())

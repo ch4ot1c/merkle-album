@@ -1,8 +1,18 @@
 
 # Merkle Album
 
-## Generator + Validator
+##### Generator + Validator
 
+Clone the project, then:
+```
+cd merkle-album
+mkdir input-flac
+<copy flacs into input-flac>
+node flac.js
+<stripped flac0s will be in stripped-flac>
+<finalized flacs will be in flac>
+<other selected export formats will be in their dirs (mp3, etc)>
+```
 
 #### For a song:
 
@@ -24,7 +34,7 @@ The merkle root is then computed. This is the 'Album Hash'.
 
 As an artist, you should publish the album merkle root **before** you publish the album. This should be done in a permanent and public way - best done as an `OP_RETURN` transaction on Bitcoin, with an address you've also published. This can be used to prove that you are the original creator of the original files.
 
-### Docs
+### Utils (TODO)
 
 `make-flac0 <input-flac>`
 
