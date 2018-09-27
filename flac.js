@@ -28,7 +28,7 @@ var Flac = {
             if (err) throw err
             console.log(stdout, stderr)
 
-            execFileSync('touch', filenames.concat(['-d 0'])) // Set modtime to Jan 1, 1970 for determinism
+            execFileSync('touch', filenames.concat(['-t 197001010000.00'])) // Set modtime to Jan 1, 1970 for determinism
             return cb(true)
         })
     },
