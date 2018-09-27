@@ -1,0 +1,16 @@
+{
+  "name": "album-validator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "copy": "^0.3.2",
+    "fs-extra": "^7.0.0",
+    "merkle": "github:ch4ot1c/merkle"
+  }
+}
